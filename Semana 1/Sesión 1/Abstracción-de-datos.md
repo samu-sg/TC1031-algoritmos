@@ -40,3 +40,10 @@ Se debe especificar lo siguiente:
 - Homogéneos (ej. arreglos)
 - Heterogéneos (ej. clase)
 - Combinado (ej. un arreglo de objetos)
+
+## Características de los Arreglos
+- Contenen datos homogéneos
+- Se puede acceder a los elementos de forma directa
+- Se definen con un tamaño fijo, ya no podemos agregar elementos
+- Si no se utiliza por completo, se desperdicia espacio en la memoria
+- Para intercalar un elemento se deben mover todos los demás
