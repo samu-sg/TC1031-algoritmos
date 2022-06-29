@@ -24,6 +24,7 @@ unsigned int sumConst(unsigned int n) {
     return res;
 }
 
+// Calcula el n-ésimo número de la serie de Fibonacci usando un método iterativo
 char fibonacciIterativo(int n) {
     unsigned long int fibonacci = 0, aux = 1;
     for (int i = 0; i < n; i++) {
@@ -34,9 +35,29 @@ char fibonacciIterativo(int n) {
     return ' ';
 }
 
+// Calcula el n-ésimo número de la serie de Fibonacci usando un método recursivo
+int fibonacciRecursivo(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacciRecursivo(n - 1) + fibonacciRecursivo(n - 2);
+
+    for (int i = 1; i <= n; i++)
+    {
+        std::cout << ' ' << fibonacciRecursivo(i);
+    }
+}
+
 int main() {
     /*std::cout << "sumConst(8): " << sumConst(8) << std::endl;
     std::cout << "sumaRecursiva(8): " << sumaRecursiva(8) << std::endl;
     std::cout << "sumaIterativa(8): " << sumaIterativa(8) << std::endl;*/
     std::cout << "fibonaccionacciIterativo(8) " << fibonacciIterativo(8) << std::endl;
+    //std::cout << "fibonaccionacciRecursivo(8) " << fibonacciRecursivo(8) << std::endl;
+    std::cout << "fibonaccionacciRecursivo(8)" << fibonacciRecursivo(8) << std::endl;
+    /*for (int i = 1; i <= 8; i++)
+    {
+        std::cout << ' ' << fibonacciRecursivo(i);
+    }*/
+    
 }
