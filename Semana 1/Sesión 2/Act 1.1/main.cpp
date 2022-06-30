@@ -1,63 +1,52 @@
+// Johan Cabrera Peña A01635713
 // Samuel Sánchez García A00831772
+// Erika Alejandra Colín Tapia A01706555
+// Fecha de creación: 28/06/2022
+// Última modificación: 30/06/2022
 
 #include <iostream>
-
-// Calcula la sumatoria de 1 hasta n con un método iterativo
-int sumaIterativa(int n) {
-    int acumulador = 0;
-    for (int i = 0; i <= n; i++) {
-        acumulador = acumulador + i;
-    }
-    return acumulador;
-}
-
-// Calcula la sumatoria de 1 hasta n con un método recursivo
-int sumaRecursiva(int n) {
-    if (n == 1) {
-        return 1;
-    }
-    return n + sumaRecursiva(n - 1);
-}
-
-unsigned int sumConst(unsigned int n) {
-    unsigned int res = (n * (n + 1)) / 2;
-    return res;
-}
-
-// Calcula el n-ésimo número de la serie de Fibonacci usando un método iterativo
-char fibonacciIterativo(int n) {
-    unsigned long int fibonacci = 0, aux = 1;
-    for (int i = 0; i < n; i++) {
-        aux = aux + fibonacci;
-        fibonacci = aux - fibonacci;
-        std::cout << fibonacci << ' ';
-    }
-    return ' ';
-}
-
-// Calcula el n-ésimo número de la serie de Fibonacci usando un método recursivo
-int fibonacciRecursivo(int n) {
-    if (n <= 1) {
-        return n;
-    }
-    return fibonacciRecursivo(n - 1) + fibonacciRecursivo(n - 2);
-
-    for (int i = 1; i <= n; i++)
-    {
-        std::cout << ' ' << fibonacciRecursivo(i);
-    }
-}
+#include "Operaciones.h"
 
 int main() {
-    /*std::cout << "sumConst(8): " << sumConst(8) << std::endl;
-    std::cout << "sumaRecursiva(8): " << sumaRecursiva(8) << std::endl;
-    std::cout << "sumaIterativa(8): " << sumaIterativa(8) << std::endl;*/
-    std::cout << "fibonaccionacciIterativo(8) " << fibonacciIterativo(8) << std::endl;
-    //std::cout << "fibonaccionacciRecursivo(8) " << fibonacciRecursivo(8) << std::endl;
-    std::cout << "fibonaccionacciRecursivo(8)" << fibonacciRecursivo(8) << std::endl;
-    /*for (int i = 1; i <= 8; i++)
-    {
-        std::cout << ' ' << fibonacciRecursivo(i);
-    }*/
-    
+  Operaciones num;
+
+  // Métodos de suma
+  std::cout << "sumaIterativa(20): " << num.sumaIterativa(20) << std::endl;
+  std::cout << "sumaRecursiva(20): " << num.sumaRecursiva(20) << std::endl;
+  std::cout << "sumaIterativa(50): " << num.sumaIterativa(50) << std::endl;
+  std::cout << "sumaRecursiva(50): " << num.sumaRecursiva(50) << std::endl;
+  std::cout << "sumaIterativa(100): " << num.sumaIterativa(100) << std::endl;
+  std::cout << "sumaRecursiva(100): " << num.sumaRecursiva(100) << std::endl;
+  std::cout << "sumaIterativa(1000): " << num.sumaIterativa(1000) << std::endl;
+  std::cout << "sumaRecursiva(1000): " << num.sumaRecursiva(1000) << std::endl; 
+
+  std::cout << "\n";
+  
+  // Métodos de Fibonacci
+  num.fibonacciIterativo(5);
+  std::cout << "fibonacciRecursivo(5): ";
+  for (int i = 1; i <= 5; i++) {
+        std::cout << num.fibonacciRecursivo(i) << ' ';
+    }
+  std::cout << "\n";
+  
+  num.fibonacciIterativo(10);
+  std::cout << "fibonacciRecursivo(10): ";
+  for (int i = 1; i <= 10; i++) {
+        std::cout << num.fibonacciRecursivo(i) << ' ';
+    }
+  std::cout << "\n";
+  
+  num.fibonacciIterativo(15);
+  std::cout << "fibonacciRecursivo(15): ";
+  for (int i = 1; i <= 15; i++) {
+        std::cout << num.fibonacciRecursivo(i) << ' ';
+    }
+  std::cout << "\n";
+  
+  num.fibonacciIterativo(30);
+  std::cout << "fibonacciRecursivo(30): ";
+  for (int i = 1; i <= 30; i++) {
+        std::cout << num.fibonacciRecursivo(i) << ' ';
+    }  
 }
