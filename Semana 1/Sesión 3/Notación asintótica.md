@@ -9,7 +9,7 @@ La función cae entre c1g(n) y c2g(n), g(n) es la misma función multiplicada po
 Acota por abajo, la función se encuentra por arriba de cg(n).
 
 ------ ***Clases básicas de eficiencia asintótica*** ------  
-Tabla
+![2022-06-29 (1)](https://user-images.githubusercontent.com/69923215/176575119-0c5b9608-0f07-4888-b7f7-4fcc142dc89b.png)
 
 ## Análisis empírico de la eficiencia temporal
 Se aplican reglas a los estatutos estructurados de un programa:  
