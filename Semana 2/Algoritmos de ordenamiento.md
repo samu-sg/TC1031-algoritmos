@@ -18,3 +18,4 @@ Su funcionamiento consiste en el recorrido por la lista seleccionando en cada it
 - En el peor caso, tendrá una complejidad **O(n^2)** porque alcanzaremos el máximo número de comparaciones e intercambios posibles.
 
 ## Complejidad temporal
+![2022-07-05](https://user-images.githubusercontent.com/69923215/177331763-2b1e1e13-fc67-4d66-8246-d8d4787ada21.png)
