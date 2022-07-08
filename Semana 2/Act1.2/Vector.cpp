@@ -1,40 +1,20 @@
-#ifndef _ALGORITMOS_H
-#define _ALGORITMOS_H
-
+#include "Vector.h"
 #include <iostream>
-#include <vector>
 
-using std::vector;
-
-class Algoritmos {
-  public:
-    // Métodos de ordenamiento
-    void ordenaBurbuja(vector<int> &vector, int &compara, int &nSwaps);
-    void ordenaMerge(vector<int> &vector, int low, int high, int &compara);
-    void merge(vector<int> &vector, int low, int m, int high, int &compara);
-    void ordenaQuick(vector<int> &vector, int &compara, int &nSwaps);
-
-    // Métodos de búsqueda
-    int busquedaSecuencialOrd(vector<int> vectorOrdenado, int dato, int &compara);
-    int busquedaBinaria(vector<int> vectorOrdenado, int low, int high, int dato, int &compara);
-};
-
-// Ordena en forma ascendente los datos con el método de Burbuja - Complejidad O(n^2) en el peor caso
-void Algoritmos::ordenaBurbuja(vector<int> &vector, int &compara, int &nSwaps) {
+// Ordena en forma ascendente los datos con el método de Burbuja - Complejidad O(n^2)
+void Vector::ordenaBurbuja(vector<int> &vector, int &compara, int &nSwaps) {
   compara = nSwaps = 0;
-  for(int i = 0; i < vector.size() - 1; i++) {
-    for(int j = 0; j < vector.size() - 1 - i; j++) {
+  for (int i = 0; i < vector.size() - 1; i++) {
+    for (int j = 0; j < vector.size() - 1 - i; j++) {
       compara++;
-      if(vector[j] > vector[j + 1]) {
+      if (vector[j] > vector[j + 1])
         std::swap(vector[j], vector[j + 1]);
-        nSwaps++;
-      }
     }
   }
 }
 
 // Ordena en forma ascendente los datos con el método Merge - Complejidad O(n log n)
-void Algoritmos::ordenaMerge(vector<int> &vector, int low, int high, int &compara) {
+void Vector::ordenaMerge(vector<int> &vector, int low, int high, int &compara) {
   if(low < high) {
     int m = (low + high) / 2;
     // Utiliza recursión para ordenar las mitades
@@ -46,7 +26,7 @@ void Algoritmos::ordenaMerge(vector<int> &vector, int low, int high, int &compar
 }
 
 // Método auxiliar de ordenaMerge - fusiona las mitades ordenadas
-void Algoritmos::merge(vector<int> &vector, int low, int m, int high, int &compara) {
+void Vector::merge(vector<int>& vector, int low, int m, int high, int &compara) {
   int i, j, k;
   int n1 = m - low + 1;
   int n2 = high - m;
@@ -70,8 +50,7 @@ void Algoritmos::merge(vector<int> &vector, int low, int m, int high, int &compa
     }
     k++;
   }
-  
-  // Revisa si hay elementos sobrantes 
+  // Se encargan de los elementos sobrantes
   while (i < n1) {
     vector[k] = L[i];
     i++;
@@ -84,17 +63,37 @@ void Algoritmos::merge(vector<int> &vector, int low, int m, int high, int &compa
   }
 }
 
-// Ordena en forma ascendente los datos con el método de Quicksort - Complejidad O(n^2) en el peor caso
-void Algoritmos::ordenaQuick(vector<int> &vector, int &compara, int &nSwaps) {
-  
+// Ordena en forma ascendente los datos con el método de Quicksort - Complejidad O(n^2)
+void Vector::ordenaQuick(vector<int> &vector, int low, int high, int &compara, int &nSwaps) {
+  if(low < high) {
+    int pi = partition(vector, low, high, compara, nSwaps);
+    ordenaQuick(vector, low, pi - 1, compara, nSwaps);
+    ordenaQuick(vector, pi + 1, high, compara, nSwaps);
+  }
+}
+
+int Vector::partition(vector<int> &vector, int low, int high, int &compara, int &nSwaps) {
+  int pivot = vector[high];
+  int i = low - 1;
+  for(int j = low; j <= high; j++) {
+    if(vector[j] < pivot) {
+      i++;
+      std::swap(vector[i], vector[j]);
+      nSwaps++;
+    }
+    compara++;
+  }
+  std::swap(vector[i + 1], vector[high]);
+  nSwaps++;
+  return i + 1;
 }
 
 // Realiza la búsqueda secuencial de un dato entero dentro del vector ordenado - Complejidad O(n)
-int Algoritmos::busquedaSecuencialOrd(vector<int> vectorOrdenado, int dato, int &compara) {
-  compara++;
+int Vector::busquedaSecuencialOrd(vector<int> vectorOrdenado, int dato, int &compara) {
   for(int i = 0; i < vectorOrdenado.size(); i++) {
+    compara++;
     if(dato <= vectorOrdenado[i]) {
-      if(vectorOrdenado[i] == dato)
+      if(dato == vectorOrdenado[i])
         return i;
       else
         return -1;
@@ -104,10 +103,10 @@ int Algoritmos::busquedaSecuencialOrd(vector<int> vectorOrdenado, int dato, int 
 }
 
 // Realiza la búsqueda binaria de un dato entero dentro del vector ordenado - Complejidad O(log n)
-int Algoritmos::busquedaBinaria(vector<int> vectorOrdenado, int low, int high, int dato, int &compara) {
+int Vector::busquedaBinaria(vector<int> vectorOrdenado, int low, int high, int dato, int &compara) {
   int m;
   if (low > high) return -1;
-  m = low + (high -low)/2;
+  m = low + (high - low)/2;
   compara++;
   if (dato == vectorOrdenado[m]) return m;
   else if (dato < vectorOrdenado[m]) 
@@ -115,5 +114,3 @@ int Algoritmos::busquedaBinaria(vector<int> vectorOrdenado, int low, int high, i
   else 
     return busquedaBinaria(vectorOrdenado, m + 1, high, dato, compara);
 }
-
-#endif // _ALGORITMOS_H
