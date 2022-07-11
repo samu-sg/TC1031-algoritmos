@@ -21,8 +21,8 @@ class LinkedList {
 
 template <class T>
 LinkedList<T>::LinkedList() {
-    head = nullnewNode;
-    tail = nullnewNode;
+    head = nullptr;
+    tail = nullptr;
     numElements = 0;
 }
 
@@ -48,7 +48,7 @@ int LinkedList<T>::getNumElements() {
 template <class T>
 void LinkedList<T>::printList() {
     Node<T> *newNode = head;
-    while (newNode != nullnewNode) {
+    while (newNode != nullptr) {
         std::cout << newNode->data << " ";
         newNode = newNode->next;
     }
