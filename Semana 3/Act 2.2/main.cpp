@@ -42,12 +42,6 @@ int main() {
   std::cout << std::endl;
 
   // deleteData
-  std::cout<<"Quicksort: " << std::endl;
-  miLista.sort();
-  miLista.printList();
-  std::cout<<"invert: "<<std::endl;
-  miLista.invert();
-  miLista.printList();
   std::cout << "Delete 5: " << std::endl;
   miLista.deleteData(5);
   miLista.printList();
@@ -144,7 +138,7 @@ int main() {
   miLista.printList();
   std::cout << std::endl; 
 
-  // sort()
+    // sort()
   std::cout << "sort(): " << std::endl;
   miLista.sort();
   miLista.printList();
@@ -153,6 +147,16 @@ int main() {
   // invert()
   std::cout << "invert(): " << std::endl;
   miLista.invert();
+  miLista.printList();
+  std::cout << std::endl;
+
+  // getReversedSublist()
+  std::cout << "getReversedSublist(0, 2): " << std::endl;
+  DoubleLinkedList<int> subLista;
+  subLista = miLista.getReversedSublist(0, 2);
+  std::cout << "Sub lista: \n";
+  subLista.printList();
+  std::cout << "Lista original: \n";
   miLista.printList();
   std::cout << std::endl;
   
