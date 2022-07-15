@@ -21,7 +21,9 @@
 int main() {
   std::cout << "Ejemplo de listas ligadas\n";
   
+  // Lista original
   DoubleLinkedList<int> miLista;
+  
   std::cout << "numElements: " << miLista.getNumElements() << std::endl;
   // addFirst
   std::cout << "Agregando 5 elementos al frente..." << std::endl;
@@ -39,8 +41,8 @@ int main() {
   }
   std::cout << "numElements: " << miLista.getNumElements() << std::endl;
   miLista.printList();
-  std::cout << std::endl;
-
+  std::cout << std::endl; 
+  
   // deleteData
   std::cout << "Delete 5: " << std::endl;
   miLista.deleteData(5);
@@ -138,25 +140,21 @@ int main() {
   miLista.printList();
   std::cout << std::endl; 
 
-    // sort()
-  std::cout << "sort(): " << std::endl;
+  // sort
+  std::cout<<"Quicksort: " << std::endl;
   miLista.sort();
   miLista.printList();
-  std::cout << std::endl;
-
-  // invert()
-  std::cout << "invert(): " << std::endl;
+  std::cout<<std::endl;
+  // invert
+  std::cout<<"invert: "<<std::endl;
   miLista.invert();
   miLista.printList();
-  std::cout << std::endl;
-
-  // getReversedSublist()
-  std::cout << "getReversedSublist(0, 2): " << std::endl;
-  DoubleLinkedList<int> subLista;
-  subLista = miLista.getReversedSublist(0, 2);
-  std::cout << "Sub lista: \n";
+  std::cout<<std::endl;
+  // getReversedSublist
+  DoubleLinkedList<int> subLista = miLista.getReversedSublist(0, 2);
+  std::cout << "Sublista(0, 2): \n";
   subLista.printList();
-  std::cout << "Lista original: \n";
+  std::cout << "Lista original: \n"; 
   miLista.printList();
   std::cout << std::endl;
   

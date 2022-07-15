@@ -26,7 +26,6 @@ class DoubleLinkedList {
     void _sort(DLLNode<T>* low, DLLNode<T>* high);
     DLLNode<T>* Particion(DLLNode<T>* low, DLLNode<T>* high);
     void invert();
-    //To do
     DoubleLinkedList<T> getReversedSublist(int inicio, int fin);
 };
 
@@ -227,7 +226,7 @@ void DoubleLinkedList<T>::updateData(T value, T newValue) {
 }
 
 template<class T>
-// Complejidad O(n)
+// Selecciona un elemento como pivote y lo coloca en su posición correcta. Los elementos más grandes a la derecha y los más pequeños a la izquierda. Complejidad O(n)
 DLLNode<T>* DoubleLinkedList<T>::Particion(DLLNode<T>* low, DLLNode<T>* high) {
   // set pivot as h element 
   int x = high->data; 
@@ -248,8 +247,9 @@ DLLNode<T>* DoubleLinkedList<T>::Particion(DLLNode<T>* low, DLLNode<T>* high) {
 }
 
 template<class T>
+// Complejidad O(n)
 void DoubleLinkedList<T>::_sort(DLLNode<T>* low, DLLNode<T>* high){
-  if (high != nullptr && low != high && low != high->next){
+  if (high != nullptr && low != high && low != high->next) {
     DLLNode<T>* p = Particion(low, high);
     _sort(low, p->prev);
     _sort(p->next, high);
@@ -257,6 +257,7 @@ void DoubleLinkedList<T>::_sort(DLLNode<T>* low, DLLNode<T>* high){
 }
 
 template<class T>
+// Ordena los datos de la lista usando el algoritmo quicksort. Complejidad O(n)
 void DoubleLinkedList<T>::sort() {
     //llamamos al quicksort recursivo
     _sort(head, tail);
@@ -277,22 +278,17 @@ template<class T>
 // Regresa una nueva sublista que comprende los elementos, en orden inverso, ubicados entre las posiciones inicio y fin de la lista. Complejidad O(n)
 DoubleLinkedList<T> DoubleLinkedList<T>::getReversedSublist(int inicio, int fin){
   DoubleLinkedList<T> salida;
-  DLLNode<T>* p = head;
-  if (inicio < 0 || fin >= numElements) {
+  DLLNode<T> *p = head;
+  if (inicio < 0 || fin > numElements) {
     throw std::out_of_range("Indice fuera de rango");
-  } 
-  else {
-    //ponemos nuestro nodo en el incio
-    for (int i = 0; i < inicio; i++) {
-      p = p->next;
-    }
-    //le agregamos nodos a nuestra lista desde el incio hasta el fin.
-    for (int i = 0; i <= fin; i++) {
-      salida.addLast(p->data);
-      p = p->next;
-    }
-    return salida;
   }
+  else {
+    for (int i = inicio; i <= fin; i++) {
+      salida.addFirst(p->data);
+      p = p->next;
+    }
+  }
+  return salida;
 }
 
 #endif // _DoubleLinkedList_H_
