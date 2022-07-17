@@ -42,6 +42,7 @@ void Bitacora::print(int pos1, int pos2) {
   }
 }
 
+// Guarda los resultados de busqueda en un archivo de texto. Complejidad O(n)
 void Bitacora::nuevoRegistro(std::string filename, int pos1 , int pos2) {
   std::ofstream file;
   file.open(filename);
@@ -62,7 +63,8 @@ void Bitacora::sort() {
   listaRegistros.sort();
 }
 
-void Bitacora::Escritura(std::string filename) {
+// Escribe la bitácora ordenada en un archivo txt. Complejidad O(n)
+void Bitacora::escribeBitacora(std::string filename) {
   std::ofstream file;
   file.open(filename);
   if (!file.good()) {
@@ -70,12 +72,12 @@ void Bitacora::Escritura(std::string filename) {
     throw std::invalid_argument("File not found");
   }
   else {
-    DLLNode<Registro> *h = listaRegistros.getHead();
-    DLLNode<Registro> *t = listaRegistros.getTail();
-    DLLNode<Registro> *ptr = h;
-    while (ptr != nullptr) {
-      file << ptr->data.getAll() << std::endl;
-      ptr = ptr->next;
+    DLLNode<Registro> *head = listaRegistros.getHead();
+    DLLNode<Registro> *tail = listaRegistros.getTail();
+    DLLNode<Registro> *p = head;
+    while (p != nullptr) {
+      file << p->data.getAll() << std::endl;
+      p = p->next;
     }
     file.close();
   }

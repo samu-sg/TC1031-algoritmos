@@ -18,7 +18,7 @@ public:
   ~Bitacora();
   void lecturaDatos(std::string fileName);
   void sort();
-  void Escritura(std::string filename);
+  void escribeBitacora(std::string filename);
   int busquedaBinaria(Registro);
   void print(int, int);
   void nuevoRegistro(std::string filename, int, int);
