@@ -19,6 +19,7 @@ int main() {
   Bitacora myBitacora;
   myBitacora.lecturaDatos("bitacora.txt");
   myBitacora.sort();
+  myBitacora.escribeBitacora("bitacoraOrdenada.txt");
   
   // Escribes las variables de la fecha una por una con un espacio.
   std::cout<<"------ Escribe la fecha inicial ------" << std::endl;
@@ -36,7 +37,7 @@ int main() {
   Registro fecha1(mes, dia, hora, min, seg, ip, puerto, msg);
   // Escribes las variables de la fecha una por una con un espacio.
   std::cout<<"------ Escribe la fecha final ------"<<std::endl;
-  std::cout << "Mes (ej. Jun): ";
+  std::cout << "Mes (ej. Ago): ";
   std::cin >> mes;
   std::cout << "Dia: ";
   std::cin >> dia;
