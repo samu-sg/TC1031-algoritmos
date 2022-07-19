@@ -106,8 +106,12 @@ void MaxHeap<T>::push(T key) {
 }
 
 template <class T> 
+// Complejidad O(1)
 T MaxHeap<T>::top() {
-  // To implement
+  if (isEmpty()) 
+    throw std::out_of_range("El vector está vacío");
+  else
+    return data[0];
 }
 
 template <class T> 
