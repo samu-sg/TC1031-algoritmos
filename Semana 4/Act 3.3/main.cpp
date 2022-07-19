@@ -1,6 +1,10 @@
 /** 
 * Ejemplo que implementa un MaxHeap (Priority queue)
 *
+* Johan Cabrera Peña A01635713
+* Samuel Sánchez García A00831772
+* Erika Alejandra Colín Tapia A01706555
+*
 * Compilacion para debug:  
 *    g++ -std=c++17 -g -o main *.cpp 
 * Ejecucion con valgrind:
@@ -37,5 +41,10 @@ int main() {
   */
   
   myMaxHeap.print();
+  std::cout << "top() " << myMaxHeap.top() << std::endl;
+  std::cout << "pop()...\n";
+  myMaxHeap.pop();
+  myMaxHeap.print();
+  
   return 0;
 }
