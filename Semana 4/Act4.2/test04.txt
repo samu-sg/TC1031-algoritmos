@@ -1,0 +1,26 @@
+Grafo dirigido ponderado
+10 10 14
+AB
+CD
+EF
+GH
+IJ
+KL
+MN
+OP
+QR
+UV
+1 2 2
+1 3 3
+1 4 3
+3 5 5
+4 3 4
+4 5 5
+4 7 6
+5 6 6
+7 8 8
+7 9 7
+8 9 1
+8 10 2
+9 6 3
+10 6 10
