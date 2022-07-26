@@ -2,7 +2,10 @@
 
 
 IP::IP() {
-
+  ip = " ";
+  ipIndex = 0;
+  degree = 0;
+  IPValue = 0;
 }
 
 IP::IP(std::string ip) {
@@ -10,7 +13,7 @@ IP::IP(std::string ip) {
   int fin = 0;
   std::string parte;
   std::vector<std::string> resultados;
-  while (fin >= 0){
+  while (fin >= 0) {
     fin = ip.find(".", inicio);
     parte = ip.substr(inicio, fin - inicio);
     inicio = fin + 1;
@@ -23,12 +26,20 @@ IP::IP(std::string ip) {
   IPValue = a*(pow(256,3)) + b*(pow(256,2)) + c*(pow(256,1)) + d*(pow(256,0));
 }
 
-unsigned int IP::getIPValue(){
-  return IPValue;
+std::string IP::getIP() {
+  return ip;
 }
 
-std::string IP::getIP(){
-  return ip;
+int IP::getIpIndex() {
+  return ipIndex;
+}
+
+int IP::getDegree() {
+  return degree;
+}
+
+unsigned int IP::getIPValue() {
+  return IPValue;
 }
 
 bool IP::operator==(const IP &other) const {
