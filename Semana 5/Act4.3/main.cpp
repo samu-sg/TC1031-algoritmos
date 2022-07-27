@@ -16,10 +16,16 @@
 #include "Graph.h"
 
 int main() {
-  Graph<std::string> io;
-  io.readGraph("bitacoraGrafos.txt");
-  io.writeDegrees("grados_ips.txt");
-  io.writeIpTopDegrees("mayores_grados_ips.txt");
-  io.writeShortestPath("distancia_bootmaster.txt");
+  Graph<std::string> ipGraph;
+  try {
+    ipGraph.readGraph("bitacoraGrafos.txt");
+    ipGraph.writeDegrees("grados_ips.txt");
+    ipGraph.writeIpTopDegrees("mayores_grados_ips.txt");
+    ipGraph.writeShortestPath("distancia_bootmaster.txt");
+  }
+  catch (std::invalid_argument &e) {
+    std::cout << "Error: " << e.what() << std::endl << "Check your file name\n";
+  }
+  
   return 0;
 }
