@@ -1,4 +1,9 @@
 /*
+*
+* Johan Cabrera Peña A01635713
+* Samuel Sánchez García A00831772
+* Erika Alejandra Colín Tapia A01706555
+*
 * compilar:
 *   g++ -std=c++17 -Wall -o main *.cpp
 *
@@ -8,15 +13,13 @@
 */
 
 #include <iostream>
-#include "Bitacora.h"
+#include "Graph.h"
 
 int main() {
-
-  Bitacora myBitacora;
-  myBitacora.lecturaDatos("bitacoraHeap.txt");
-  myBitacora.sort();
-  myBitacora.write("bitacora_ordenada.txt");
-  myBitacora.LosRepetidos("ips_con_mayor_acceso.txt");
-  
+  Graph<std::string> io;
+  io.readGraph("bitacoraGrafos.txt");
+  io.writeDegrees("grados_ips.txt");
+  io.writeIpTopDegrees("mayores_grados_ips.txt");
+  io.writeShortestPath("distancia_bootmaster.txt");
   return 0;
 }
