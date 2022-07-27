@@ -21,15 +21,15 @@ class Graph {
     int numEdges;
     int indexBootMaster;
 
-    // boot master <ip, grado>
+    // boot master <ip, degree>
     std::pair<std::string, int> BootMaster;
-    //lista de adyacencia
+    // Lista de adyacencia, vector de listas ligadas de pares (vertice, peso)
     std::vector<LinkedList<std::pair<int, int>>> adjList;
     // ips a numero entero
     std::map<unsigned int, IP> mapIP;
-    //vector de ips
+    // vector de ips
     std::vector<IP> IPS;
-    // max heap <IP, degree>
+    // max heap <degree, IP>
     std::priority_queue<std::pair<int, std::string>> maxHeap;
 
     void split(std::string line, std::vector<int> &res);
@@ -44,18 +44,21 @@ class Graph {
 };
 
 template <class T>
+// Complejidad O(1)
 Graph<T>::Graph() {
   numNodes = 0;
   numEdges = 0;
 }
 
 template <class T>
+// Complejidad O(1)
 Graph<T>::~Graph(){
   adjList.clear();
   IPS.clear();
 }
 
 template <class T>
+// Almacena los datos en en una lista de adyacencias organizada por la dirección IP. Complejidad O(n)
 void Graph<T>::readGraph(std::string fileName){
   std::string IP1, IP2, line, W;
   int i = 0; 
@@ -81,7 +84,7 @@ void Graph<T>::readGraph(std::string fileName){
           adjList[j] = List;
         }
       } else if (i > 0 && i <= numNodes) {
-        IP ip(line, "", i);
+        IP ip(line, " ", i);
         IPS[i] = ip;
         mapIP.insert({ip.getIPValue(), ip}); // {string ip, int}
       } else if (i > numNodes) {
@@ -94,8 +97,8 @@ void Graph<T>::readGraph(std::string fileName){
         std::size_t f5 = line.find(" ", f4 + 1);
         W = line.substr(f4, f5 - f4);
         // Crear arista ip1 a ip2 con un peso
-        IP ip1(IP1, "", 0);
-        IP ip2(IP2, "", 0);
+        IP ip1(IP1, " ", 0);
+        IP ip2(IP2, " ", 0);
         std::map<unsigned int, IP>::iterator j;
         int ip1Index, ip2Index;
         j = mapIP.find(ip1.getIPValue());
@@ -105,8 +108,8 @@ void Graph<T>::readGraph(std::string fileName){
         if (j != mapIP.end())
           ip2Index = j->second.getIpIndex();
         adjList[ip1Index].addLast({ip2Index, stoi(W)});
-        IPS[ip1Index].addDegree(); // grado de salida
-        // ips[ip2Index].addToIncommingDegree();
+        // Grado de salida
+        IPS[ip1Index].addDegree();
       }
       i++;
     }
@@ -115,6 +118,7 @@ void Graph<T>::readGraph(std::string fileName){
 }
 
 template <class T>
+// Complejidad O(n)
 void Graph<T>::split(std::string line, std::vector<int> &res) {
  size_t strPos = line.find(" ");
   size_t lastPos = 0;
@@ -127,14 +131,15 @@ void Graph<T>::split(std::string line, std::vector<int> &res) {
 }
 
 template <class T>
-void Graph<T>::writeDegrees(std::string fileName){
+// Determina el grado de salida de cada nodo del grafoy almacena los pares (IP, grado de salida) en un archivo de texto. Complejidad O(n)
+void Graph<T>::writeDegrees(std::string fileName) {
   std::ofstream archivo(fileName);
   if(!archivo.good()) {
     archivo.close();
     throw std::invalid_argument("File not foud");
   }
   else {
-  for(int i = 1 ; i <= numNodes ; i++) {
+  for (int i = 1 ; i <= numNodes ; i++) {
     archivo << "ip: " << IPS[i].getIp() << " - grado: " << IPS[i].getDegree() << std::endl;
     maxHeap.push(std::make_pair(IPS[i].getDegree(), IPS[i].getIp()));
   }
@@ -143,12 +148,14 @@ void Graph<T>::writeDegrees(std::string fileName){
 }
 
 template <class T>
-void Graph<T>::writeIpTopDegrees(std::string fileName){
+// Determina las 5 IPs con mayor grado de salida y almacena una lista con los pares (IP, grado de salida). Complejidad O(n)
+void Graph<T>::writeIpTopDegrees(std::string fileName) {
   std::ofstream archivo(fileName);
-  if(!archivo.good()){
+  if(!archivo.good()) {
     archivo.close();
     throw std::invalid_argument("File not foud");
-  }else{
+  }
+  else {
     archivo << "Ip, Degree" << std::endl;
     for(int i = 1 ; i <= 5 ; i++) {
       std::pair<int, std::string> p = maxHeap.top();
@@ -164,7 +171,7 @@ void Graph<T>::writeIpTopDegrees(std::string fileName){
           indexBootMaster = it->second.getIpIndex();
       }
     }
-    // Aqui imprime info del BootMaster
+    // ¿En qué dirección IP presumiblemente se encuentra el boot master?
     std::cout << "BOOTMASTER\n";
     std::cout << "Ip: " << BootMaster.first << std::endl;
     std::cout << "Degree: " << BootMaster.second << std::endl;
@@ -175,7 +182,8 @@ void Graph<T>::writeIpTopDegrees(std::string fileName){
 }
 
 template <class T>
-void Graph<T>::writeShortestPath(std::string fileName){
+// Encuentre el camino más corto entre la IP que identificó como el boot master y el resto de los nodos (IPs) del grafo. Complejidad O(E log V)
+void Graph<T>::writeShortestPath(std::string fileName) {
   // https://www.geeksforgeeks.org/implement-min-heap-using-stl/
   std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>,std::greater<std::pair<int, int>>> path;
 
@@ -231,7 +239,7 @@ void Graph<T>::writeShortestPath(std::string fileName){
         maxIndex = j;
       }
     }
-    // Farthest Ip and its position
+    // ¿Cuál es la dirección IP que presumiblemente requiere más esfuerzo para que el boot master la ataque?
     std::cout << std::endl;
     std::cout << "Farthest Ip from BootMaster: " << IPS[maxIndex].getIp() << std::endl;
     std::cout << "Distance from BootMaster: " << maxDistance << std::endl;
