@@ -25,6 +25,7 @@ public:
 };
 
 template<class K, class T>
+// Complejidad O(1)
 OpenHash<K, T>::OpenHash(int selectedMaxSize) {
     maxCapacity = selectedMaxSize;
     numElements = 0;
@@ -33,16 +34,19 @@ OpenHash<K, T>::OpenHash(int selectedMaxSize) {
 
 // Hash function recibe una llave
 template<class K, class T>
+// Complejidad O(1)
 int OpenHash<K, T>::getIndex(K keyVal) {
     return keyVal % maxCapacity;
 }
 
 template<class K, class T>
+// Complejidad O(1)
 int OpenHash<K, T>::getSize() {
     return numElements;
 }
 
 template<class K, class T>
+// Complejidad O(n)
 void OpenHash<K, T>::print() {
     std::cout << "Content of the hash table: " << std::endl;
     for (int i = 0; i < maxCapacity; i++) {
@@ -54,6 +58,7 @@ void OpenHash<K, T>::print() {
 }
 
 template<class K, class T>
+// Complejidad O(1)
 void OpenHash<K, T>::add(K keyVal, T value) {
     if (numElements == maxCapacity) {
         throw std::out_of_range("Hash Table full");
@@ -67,6 +72,7 @@ void OpenHash<K, T>::add(K keyVal, T value) {
 }
 
 template<class K, class T>
+// Complejidad O(1)
 T OpenHash<K, T>::find(K keyVal) {
     int hashIndex = getIndex(keyVal);
     HashNode<K, T> hashNode;
@@ -78,6 +84,7 @@ T OpenHash<K, T>::find(K keyVal) {
 }
 
 template<class K, class T>
+// Complejidad O(1)
 void OpenHash<K, T>::remove(K keyVal) {
     find(keyVal);
     int hashIndex = getIndex(keyVal);

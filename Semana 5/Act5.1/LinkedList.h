@@ -7,8 +7,8 @@
 template <class T>
 class LinkedList {
 private:
-    Node<T>* head;
-    Node<T>* tail;
+    Node<T> *head;
+    Node<T> *tail;
     int numElements;
 
 public:
@@ -24,6 +24,7 @@ public:
 };
 
 template<class T>
+// Complejidad O(1)
 LinkedList<T>::LinkedList() {
     head = nullptr;
     tail = nullptr;
@@ -31,6 +32,7 @@ LinkedList<T>::LinkedList() {
 }
 
 template<class T>
+// Complejidad O(1)
 LinkedList<T>::~LinkedList() {
     Node<T>* prev, * q;
     prev = head;
@@ -45,11 +47,13 @@ LinkedList<T>::~LinkedList() {
 }
 
 template<class T>
+// Complejidad O(1)
 int LinkedList<T>::getNumElements() {
     return numElements;
 }
 
 template<class T>
+// Complejidad O(n)
 void LinkedList<T>::printList() {
     Node<T>* ptr = head;
     while (ptr != nullptr) {
@@ -60,6 +64,7 @@ void LinkedList<T>::printList() {
 }
 
 template<class T>
+// Complejidad O(1)
 void LinkedList<T>::addFirst(T value) {
     // creando un nuevo nodo de la lista
     Node<T>* newNode = new Node<T>(value);
@@ -76,6 +81,7 @@ void LinkedList<T>::addFirst(T value) {
 }
 
 template<class T>
+// Complejidad O(1)
 void LinkedList<T>::addLast(T value) {
     // Si la lista esta vacia if(head == nullptr)
     if (numElements == 0) {
@@ -92,6 +98,7 @@ void LinkedList<T>::addLast(T value) {
 }
 
 template<class T>
+// Complejidad O(n)
 bool LinkedList<T>::deleteData(T value) {
     bool estado = false;
     // Si la lista esta vacia
@@ -128,6 +135,7 @@ bool LinkedList<T>::deleteData(T value) {
 }
 
 template<class T>
+// Complejidad O(n)
 T LinkedList<T>::getData(int position) {
     if (position < 0 || position >= numElements) {
         throw std::out_of_range("Indice fuera de rango");
@@ -148,6 +156,7 @@ T LinkedList<T>::getData(int position) {
 }
 
 template<class T>
+// Complejidad O(n)
 T LinkedList<T>::findData(T value) {
     Node<T>* p = head;
     while (p != nullptr) {
